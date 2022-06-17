@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todays departures</title>
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+    window.addEventListener("message", (event) => {
+
+      // where the origin should be checked
+      // if (event.origin !== "allowedDomain.tld") return;
+
+
+      const message = JSON.parse(event.data);
+      console.log(message);
+
+      const { flights, airport } = message;
+
+      console.log(airport);
+
+      // DANGEROUS SINK HERE!
+      document.getElementById('airport').innerHTML = airport;
+
+      // Create table elements
+      var flightTable = document.getElementById('flightTable');
+
+      flights.forEach(flight => {
+        var row = document.createElement("tr");
+        flightTable.appendChild(row);
+        var airline = document.createElement("td");
+        var from = document.createElement("td");
+        var time = document.createElement("td");
+        airline.innerText = flight.airline;
+        from.innerText = flight.from;
+        time.innerHTML = flight.time;
+        row.appendChild(airline);
+        row.appendChild(from);
+        row.appendChild(time);
+      });
+
+
+    }, false);
+  </script>
+
+  <h2 id="airport" style="width: 80%">loading...</h2>
+
+  <table id="flightTable" style="width:80%; margin: 0 auto;">
+    <tr>
+      <th>Airline</th>
+      <th>From</th>
+      <th>Time</th>
+    </tr>
+    <tr>
+    </tr>
+  </table>
+
+</body>
+
+</html>

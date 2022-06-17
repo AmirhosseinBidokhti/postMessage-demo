@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dispatcher</title>
+</head>
+
+<body>
+  <h1>Sending the airport data</h1>
+  <script>
+
+
+    const msg = {
+      "airport": "Mashhad International Airport",
+      "flights": [
+        {
+          "airline": "Homa",
+          "from": "Tehran",
+          "time": "14:30"
+        },
+        {
+          "airline": "Qeshm Air",
+          "from": "Qeshm",
+          "time": "16:45"
+        },
+        {
+          "airline": "Fly Persia",
+          "from": "Shiraz",
+          "time": "18:00"
+        },
+        {
+          "airline": "Zagros",
+          "from": "Bandar Abbas",
+          "time": "11:00"
+        },
+        {
+          "airline": "Varesh",
+          "from": "Shahrood",
+          "time": "3:00"
+        },
+        {
+          "airline": "Kish Air",
+          "from": "Kish",
+          "time": "19:15"
+        },
+        {
+          "airline": "Aseman",
+          "from": "Tabriz",
+          "time": "20:33"
+        }
+      ]
+    };
+
+    // simulating the sending message via postMessage (Cross Origin Resource Sharing)
+    function sendMessage(message) {
+
+
+      var popup = window.open('http://somewebsite.com', "pop", "width=850,height=750,resizable=1");
+
+      setTimeout(() => {
+        popup.postMessage(JSON.stringify(message), "*");
+      }, 3000);
+
+    }
+
+  </script>
+
+  <div style="margin: 0 auto;">
+    <button onclick="sendMessage(msg)">Send the flight reports</button>
+  </div>
+
+</body>
+
+</html>
